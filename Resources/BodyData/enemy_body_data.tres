@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyBodyData" load_steps=2 format=3 uid="uid://chac8tce7ao3c"]
+
+[ext_resource type="Script" uid="uid://cajgpankunmg" path="res://Scripts/CustomResources/enemy_body_data.gd" id="1_ao146"]
+
+[resource]
+script = ExtResource("1_ao146")
+idle_time = 1.0
+charge_time = 1.0
+hit_restoring_time = 0.2
+view_distance = 80.0
+max_hp = 8
+attack = 1
+speed = 100.0
+jump_cooldown = 1.0
+jump_strength = 500.0
+attack_cooldown = 1.5
+metadata/_custom_type_script = "uid://mehue1d4q6bb"

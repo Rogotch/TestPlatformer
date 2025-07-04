@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://c01hxsy7vqx57"]
+
+[ext_resource type="PackedScene" uid="uid://c10vcvg16rdql" path="res://Entities/Characters/base_character.tscn" id="1_jkmry"]
+[ext_resource type="Script" uid="uid://dxbodmpxylaet" path="res://Scripts/Character/enemy_character_class.gd" id="2_knheh"]
+[ext_resource type="Script" uid="uid://hw1vraco4v6w" path="res://Scripts/CustomResources/Controllers/enemy_controller.gd" id="2_ww54v"]
+[ext_resource type="Resource" uid="uid://chac8tce7ao3c" path="res://Resources/BodyData/enemy_body_data.tres" id="4_545rg"]
+[ext_resource type="Texture2D" uid="uid://dile3w6i6uaje" path="res://Sprites/Characters/ogre_.png" id="5_knheh"]
+[ext_resource type="Texture2D" uid="uid://bbrymmf88wt7c" path="res://Sprites/Characters/ogreHand_.png" id="6_545rg"]
+
+[sub_resource type="Resource" id="Resource_tujc4"]
+script = ExtResource("2_ww54v")
+metadata/_custom_type_script = "uid://hw1vraco4v6w"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pwjkf"]
+radius = 32.0
+height = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knheh"]
+radius = 190.0
+
+[node name="enemy_character" instance=ExtResource("1_jkmry")]
+script = ExtResource("2_knheh")
+controller = SubResource("Resource_tujc4")
+body_data = ExtResource("4_545rg")
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("5_knheh")
+frame = 1
+
+[node name="hand_position" parent="sprite/hand_node" index="0"]
+position = Vector2(-5.75, 7)
+
+[node name="hand" parent="sprite/hand_node/hand_position" index="0"]
+position = Vector2(0, 0)
+rotation = 0.0
+texture = ExtResource("6_545rg")
+
+[node name="weapon" parent="sprite/hand_node/hand_position/hand" index="0"]
+frame = 20
+
+[node name="shape" parent="." index="2"]
+position = Vector2(0, 20)
+shape = SubResource("CapsuleShape2D_pwjkf")
+
+[node name="detect_cliff" type="Node2D" parent="." index="3"]
+
+[node name="detect_cliff_raycast" type="RayCast2D" parent="detect_cliff" index="0"]
+position = Vector2(59, 0)
+target_position = Vector2(0, 90)
+
+[node name="detect_player" type="Area2D" parent="." index="4"]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="detect_player" index="0"]
+shape = SubResource("CircleShape2D_knheh")
+
+[node name="detect_player_raycast" type="RayCast2D" parent="detect_player" index="1"]
+target_position = Vector2(0, 0)
+collision_mask = 2
+
+[node name="idle_timer" type="Timer" parent="timers" index="2"]
+one_shot = true
+
+[node name="hit_restoring_timer" type="Timer" parent="timers" index="3"]
+one_shot = true
+
+[node name="charge_timer" type="Timer" parent="timers" index="4"]
+one_shot = true
+
+[node name="on_the_ground_raycast" parent="." index="8"]
+target_position = Vector2(0, 58)
+
+[connection signal="body_entered" from="detect_player" to="." method="_on_detect_player_body_entered"]
+[connection signal="body_exited" from="detect_player" to="." method="_on_detect_player_body_exited"]
+[connection signal="timeout" from="timers/idle_timer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="timers/hit_restoring_timer" to="." method="_on_hit_restoring_timer_timeout"]
+[connection signal="timeout" from="timers/charge_timer" to="." method="_on_charge_timer_timeout"]

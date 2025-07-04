@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0d3md84wr4pn"]
+
+[ext_resource type="Script" uid="uid://dfvl4u5on18wj" path="res://Scripts/Global/ui_hub.gd" id="1_82wxn"]
+[ext_resource type="Texture2D" uid="uid://d1mudayh8xmj1" path="res://Sprites/UI/iconsDefault.png" id="2_2v4d0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uyu3"]
+texture = ExtResource("2_2v4d0")
+axis_stretch_horizontal = 1
+region_rect = Rect2(448, 64, 64, 64)
+modulate_color = Color(0.458824, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_itok0"]
+texture = ExtResource("2_2v4d0")
+axis_stretch_horizontal = 1
+region_rect = Rect2(448, 64, 64, 64)
+modulate_color = Color(0.93416, 0.161047, 0.197072, 1)
+
+[node name="UiHub" type="CanvasLayer"]
+script = ExtResource("1_82wxn")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Победа!"
+size = Vector2i(155, 100)
+ok_button_text = "Начать заново"
+dialog_text = "Вы прошли игру!"
+
+[node name="dialog_win" type="ConfirmationDialog" parent="."]
+title = "Победа!"
+min_size = Vector2i(0, 0)
+ok_button_text = "Начать заново"
+dialog_text = "Вы прошли игру!"
+cancel_button_text = "Выйти"
+
+[node name="health_bar" type="ProgressBar" parent="."]
+offset_right = 128.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxTexture_3uyu3")
+theme_override_styles/fill = SubResource("StyleBoxTexture_itok0")
+max_value = 2.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[connection signal="canceled" from="dialog_win" to="." method="_on_dialog_win_canceled"]
+[connection signal="confirmed" from="dialog_win" to="." method="_on_dialog_win_confirmed"]

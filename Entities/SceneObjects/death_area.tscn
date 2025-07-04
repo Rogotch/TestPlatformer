@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://p04v5521h6xv"]
+
+[ext_resource type="Script" uid="uid://dkhqao8bi8e78" path="res://Scripts/scene_entities/death_area.gd" id="1_gi5sh"]
+
+[node name="death_area" type="Area2D"]
+script = ExtResource("1_gi5sh")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

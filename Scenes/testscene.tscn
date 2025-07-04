@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=4 uid="uid://dbhjjt5kc0il2"]
+
+[ext_resource type="PackedScene" uid="uid://bb3220po1b1km" path="res://Entities/Characters/player_character.tscn" id="1_wni78"]
+[ext_resource type="PackedScene" uid="uid://c01hxsy7vqx57" path="res://Entities/Characters/enemy_character.tscn" id="3_vy56e"]
+[ext_resource type="Texture2D" uid="uid://b44mq4b5fcobc" path="res://Sprites/Level/tiles_sheet.png" id="5_0pdfm"]
+[ext_resource type="PackedScene" uid="uid://p04v5521h6xv" path="res://Entities/SceneObjects/death_area.tscn" id="5_ggkdx"]
+[ext_resource type="PackedScene" uid="uid://deyhwp0t3itci" path="res://Entities/SceneObjects/victory_area.tscn" id="6_3hk28"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ggkdx"]
+texture = ExtResource("5_0pdfm")
+texture_region_size = Vector2i(70, 70)
+6:9/0 = 0
+6:9/0/terrain_set = 0
+6:9/0/terrain = 0
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
+6:9/0/terrains_peering_bit/right_side = 0
+6:9/0/terrains_peering_bit/left_side = 0
+7:9/0 = 0
+7:9/0/terrain_set = 0
+7:9/0/terrain = 0
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 1, 10, 25, -35, 35)
+7:9/0/terrains_peering_bit/left_side = 0
+7:11/0 = 0
+7:11/0/terrain_set = 0
+7:11/0/terrain = 0
+7:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -13, 23, -35, -4)
+7:11/0/terrains_peering_bit/right_side = 0
+8:1/0 = 0
+8:1/0/terrain_set = 0
+8:1/0/terrain = 0
+
+[sub_resource type="TileSet" id="TileSet_3hk28"]
+tile_size = Vector2i(70, 70)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 3
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "Base"
+terrain_set_0/terrain_0/color = Color(0.17156, 0.404419, 0.578448, 1)
+sources/0 = SubResource("TileSetAtlasSource_ggkdx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hk28"]
+size = Vector2(2000, 1000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggkdx"]
+size = Vector2(180, 40)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["platform"]]
+tile_map_data = PackedByteArray("AAAEAAMAAAAHAAsAAAAFAAMAAAAGAAkAAAAGAAMAAAAGAAkAAAAHAAMAAAAGAAkAAAALAAMAAAAHAAsAAAAMAAMAAAAGAAkAAAANAAMAAAAGAAkAAAAOAAMAAAAHAAkAAAABAAYAAAAHAAsAAAACAAYAAAAGAAkAAAADAAYAAAAGAAkAAAAEAAYAAAAGAAkAAAAFAAYAAAAGAAkAAAAGAAYAAAAGAAkAAAAHAAYAAAAGAAkAAAAIAAYAAAAGAAkAAAAJAAYAAAAGAAkAAAAKAAYAAAAGAAkAAAALAAYAAAAGAAkAAAAMAAYAAAAGAAkAAAANAAYAAAAGAAkAAAAOAAYAAAAGAAkAAAAPAAYAAAAGAAkAAAAQAAYAAAAGAAkAAAARAAYAAAAHAAkAAAAIAAMAAAAHAAkAAAACAAQAAAAHAAsAAAADAAQAAAAHAAkAAAAQAAIAAAAHAAsAAAARAAIAAAAGAAkAAAASAAIAAAAGAAkAAAATAAIAAAAHAAkAAAA=")
+tile_set = SubResource("TileSet_3hk28")
+
+[node name="player_character" parent="." instance=ExtResource("1_wni78")]
+position = Vector2(405, 162)
+
+[node name="Camera2D" type="Camera2D" parent="player_character"]
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="enemy_character" parent="." instance=ExtResource("3_vy56e")]
+position = Vector2(902, 150)
+
+[node name="death_area" parent="." instance=ExtResource("5_ggkdx")]
+position = Vector2(706, 127)
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+area_shape = SubResource("RectangleShape2D_3hk28")
+
+[node name="victory_area" parent="." instance=ExtResource("6_3hk28")]
+position = Vector2(1270, 120)
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+area_shape = SubResource("RectangleShape2D_ggkdx")
+
+[node name="Label" type="Label" parent="victory_area"]
+offset_left = -42.0
+offset_top = -14.0
+offset_right = 47.0
+offset_bottom = 9.0
+text = "Победа тут"

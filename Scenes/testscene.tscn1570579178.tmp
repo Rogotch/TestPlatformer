@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbhjjt5kc0il2"]
+
+[ext_resource type="PackedScene" uid="uid://bb3220po1b1km" path="res://Entities/Characters/player_character.tscn" id="1_wni78"]
+[ext_resource type="Texture2D" uid="uid://bsctd08dbygko" path="res://icon.svg" id="2_nes3m"]
+[ext_resource type="Resource" uid="uid://dqtcp46ixrcui" path="res://Resources/BodyData/player_body_data.tres" id="2_vy56e"]
+[ext_resource type="PackedScene" uid="uid://c01hxsy7vqx57" path="res://Entities/Characters/enemy_character.tscn" id="3_vy56e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vy56e"]
+size = Vector2(200, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player_character" parent="." instance=ExtResource("1_wni78")]
+position = Vector2(53, 79)
+body_data = ExtResource("2_vy56e")
+
+[node name="Camera2D" type="Camera2D" parent="player_character"]
+zoom = Vector2(3, 3)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="enemy_character" parent="." instance=ExtResource("3_vy56e")]
+position = Vector2(148, 77)
+
+[node name="platform" type="StaticBody2D" parent="." groups=["platform"]]
+position = Vector2(127, 116)
+collision_mask = 3
+
+[node name="sprite" type="Sprite2D" parent="platform"]
+scale = Vector2(1.575, 0.155)
+texture = ExtResource("2_nes3m")
+
+[node name="shape" type="CollisionShape2D" parent="platform"]
+shape = SubResource("RectangleShape2D_vy56e")

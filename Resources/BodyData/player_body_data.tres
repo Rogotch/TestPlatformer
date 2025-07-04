@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BodyData" load_steps=2 format=3 uid="uid://dqtcp46ixrcui"]
+
+[ext_resource type="Script" uid="uid://mehue1d4q6bb" path="res://Scripts/CustomResources/body_data.gd" id="1_c28h1"]
+
+[resource]
+script = ExtResource("1_c28h1")
+max_hp = 1
+attack = 1
+speed = 300.0
+jump_cooldown = 0.5
+jump_strength = 900.0
+attack_cooldown = 0.5
+metadata/_custom_type_script = "uid://mehue1d4q6bb"
