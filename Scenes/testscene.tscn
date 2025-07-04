@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dbhjjt5kc0il2"]
+[gd_scene load_steps=11 format=4 uid="uid://dbhjjt5kc0il2"]
 
 [ext_resource type="PackedScene" uid="uid://bb3220po1b1km" path="res://Entities/Characters/player_character.tscn" id="1_wni78"]
 [ext_resource type="PackedScene" uid="uid://c01hxsy7vqx57" path="res://Entities/Characters/enemy_character.tscn" id="3_vy56e"]
@@ -38,6 +38,9 @@ terrain_set_0/terrain_0/name = "Base"
 terrain_set_0/terrain_0/color = Color(0.17156, 0.404419, 0.578448, 1)
 sources/0 = SubResource("TileSetAtlasSource_ggkdx")
 
+[sub_resource type="LabelSettings" id="LabelSettings_0pdfm"]
+line_spacing = -7.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hk28"]
 size = Vector2(2000, 1000)
 
@@ -49,6 +52,17 @@ size = Vector2(180, 40)
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["platform"]]
 tile_map_data = PackedByteArray("AAAEAAMAAAAHAAsAAAAFAAMAAAAGAAkAAAAGAAMAAAAGAAkAAAAHAAMAAAAGAAkAAAALAAMAAAAHAAsAAAAMAAMAAAAGAAkAAAANAAMAAAAGAAkAAAAOAAMAAAAHAAkAAAABAAYAAAAHAAsAAAACAAYAAAAGAAkAAAADAAYAAAAGAAkAAAAEAAYAAAAGAAkAAAAFAAYAAAAGAAkAAAAGAAYAAAAGAAkAAAAHAAYAAAAGAAkAAAAIAAYAAAAGAAkAAAAJAAYAAAAGAAkAAAAKAAYAAAAGAAkAAAALAAYAAAAGAAkAAAAMAAYAAAAGAAkAAAANAAYAAAAGAAkAAAAOAAYAAAAGAAkAAAAPAAYAAAAGAAkAAAAQAAYAAAAGAAkAAAARAAYAAAAHAAkAAAAIAAMAAAAHAAkAAAACAAQAAAAHAAsAAAADAAQAAAAHAAkAAAAQAAIAAAAHAAsAAAARAAIAAAAGAAkAAAASAAIAAAAGAAkAAAATAAIAAAAHAAkAAAA=")
 tile_set = SubResource("TileSet_3hk28")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 285.0
+offset_top = 67.0
+offset_right = 558.0
+offset_bottom = 138.0
+text = "Движение:         Атака - ЛКМ
+
+    W                       Прыжок - ПРОБЕЛ
+A  S  D"
+label_settings = SubResource("LabelSettings_0pdfm")
 
 [node name="player_character" parent="." instance=ExtResource("1_wni78")]
 position = Vector2(405, 162)
